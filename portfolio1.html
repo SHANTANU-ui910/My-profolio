@@ -1,0 +1,1441 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shantanu | Portfolio</title>
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+  <style>
+    /* Import Google Fonts */
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+
+    /* CSS Variables for Design System */
+    :root {
+      --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+      --success-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+      --dark-gradient: linear-gradient(135deg, #2d3748 0%, #1a202c 100%);
+      --light-bg: #f8f9fa;
+      --card-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+      --card-shadow-hover: 0 20px 60px rgba(0, 0, 0, 0.15);
+    }
+
+    /* Global Styles */
+    * {
+      font-family: 'Inter', 'Poppins', sans-serif;
+    }
+
+    body {
+      overflow-x: hidden;
+    }
+
+    /* Smooth Scroll */
+    html {
+      scroll-behavior: smooth;
+    }
+
+    /* Hero Section */
+    .hero-section {
+      background: linear-gradient(135deg, rgba(102, 126, 234, 0.9) 0%, rgba(118, 75, 162, 0.9) 100%),
+        url('images/bg.png');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      min-height: 100vh;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: radial-gradient(circle at 20% 50%, rgba(102, 126, 234, 0.3) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(118, 75, 162, 0.3) 0%, transparent 50%);
+      animation: pulse 15s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+
+      0%,
+      100% {
+        opacity: 0.5;
+      }
+
+      50% {
+        opacity: 1;
+      }
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      animation: fadeInUp 1s ease-out;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .text-gradient {
+      background: linear-gradient(135deg, #fff 0%, #a8b8ff 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-title {
+      font-size: 4rem;
+      font-weight: 900;
+      line-height: 1.2;
+    }
+
+    .hero-subtitle {
+      opacity: 0.95;
+      font-weight: 300;
+    }
+
+    .text-primary-light {
+      color: #a8b8ff !important;
+    }
+
+    /* Hero Image */
+    .hero-image-wrapper {
+      position: relative;
+      display: inline-block;
+      animation: fadeInRight 1s ease-out 0.3s backwards;
+    }
+
+    @keyframes fadeInRight {
+      from {
+        opacity: 0;
+        transform: translateX(50px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    .hero-image-border {
+      position: absolute;
+      top: -20px;
+      left: -20px;
+      right: -20px;
+      bottom: -20px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0.1) 100%);
+      z-index: -1;
+      animation: rotate 20s linear infinite;
+    }
+
+    @keyframes rotate {
+      from {
+        transform: rotate(0deg);
+      }
+
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    .hero-profile-img {
+      max-width: 400px;
+      width: 100%;
+      height: auto;
+      border-radius: 50%;
+      border: 8px solid rgba(255, 255, 255, 0.2);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      transition: transform 0.3s ease;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-profile-img:hover {
+      transform: scale(1.05);
+    }
+
+    /* Social Icons */
+    .social-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      color: white;
+      font-size: 1.2rem;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .social-icon:hover {
+      background: rgba(255, 255, 255, 0.9);
+      color: #667eea;
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Button Hover Lift */
+    .btn-hover-lift {
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .btn-hover-lift:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+    }
+
+    /* About Section - Profile Image */
+    .profile-img {
+      max-width: 350px;
+      width: 100%;
+      border-radius: 50%;
+      border: 8px solid white;
+      box-shadow: var(--card-shadow);
+      transition: all 0.4s ease;
+      position: relative;
+    }
+
+    .profile-img:hover {
+      transform: scale(1.05) rotate(2deg);
+      box-shadow: var(--card-shadow-hover);
+    }
+
+    /* Service Cards */
+    .service-card {
+      transition: all 0.4s ease;
+      border-radius: 20px !important;
+      background: white;
+      border: none !important;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .service-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 5px;
+      background: var(--primary-gradient);
+      transform: scaleX(0);
+      transition: transform 0.4s ease;
+    }
+
+    .service-card:hover {
+      transform: translateY(-10px);
+      box-shadow: var(--card-shadow-hover);
+    }
+
+    .service-card:hover::before {
+      transform: scaleX(1);
+    }
+
+    /* Skill Cards */
+    .skill-icon {
+      font-size: 3rem;
+      background: var(--primary-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      transition: all 0.3s ease;
+    }
+
+    .card:hover .skill-icon {
+      transform: scale(1.1) rotate(5deg);
+    }
+
+    /* Portfolio Cards */
+    .portfolio-card {
+      transition: all 0.4s ease;
+      border-radius: 20px !important;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .portfolio-card::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: var(--primary-gradient);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .portfolio-card:hover {
+      transform: translateY(-10px) scale(1.02);
+      box-shadow: var(--card-shadow-hover);
+    }
+
+    .portfolio-card:hover::after {
+      opacity: 0.1;
+    }
+
+    /* Experience Timeline */
+    .list-group-item {
+      transition: all 0.3s ease;
+      border-radius: 15px !important;
+      margin-bottom: 1rem !important;
+      padding: 1.5rem !important;
+      background: white !important;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    }
+
+    .list-group-item:hover {
+      transform: translateX(10px);
+      box-shadow: var(--card-shadow);
+    }
+
+    /* Testimonial Section */
+    .carousel-item {
+      padding: 2rem;
+    }
+
+    /* Sections */
+    section {
+      padding: 100px 0;
+      position: relative;
+    }
+
+    /* Animated Section Headers */
+    .text-center h6 {
+      font-size: 2.5rem;
+      letter-spacing: 3px;
+      margin-bottom: 1.5rem;
+      font-weight: 800;
+    }
+
+    .text-center h2 {
+      position: relative;
+      display: inline-block;
+      font-size: 2rem;
+      font-weight: 600;
+    }
+
+    .text-center h2::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 4px;
+      background: var(--primary-gradient);
+      border-radius: 2px;
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 10px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #f1f1f1;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      border-radius: 5px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+    }
+
+    /* Navbar Enhancement */
+    .navbar {
+      backdrop-filter: blur(10px);
+      background: rgba(255, 255, 255, 0.95) !important;
+      box-shadow: 0 2px 20px rgba(0, 0, 0, 0.08) !important;
+      transition: all 0.3s ease;
+      border-bottom: 1px solid rgba(102, 126, 234, 0.1);
+    }
+
+    .nav-link {
+      position: relative;
+      transition: all 0.3s ease;
+      color: #2d3748 !important;
+      font-weight: 500;
+    }
+
+    .nav-link:hover {
+      color: #667eea !important;
+    }
+
+    .navbar-brand {
+      color: #2d3748 !important;
+      font-weight: 700;
+    }
+
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0;
+      height: 2px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      transition: width 0.3s ease;
+    }
+
+    .nav-link:hover::after,
+    .nav-link.active::after {
+      width: 80%;
+    }
+
+    /* Glass Effect Cards */
+    .glass-card {
+      background: rgb(0, 0, 0);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgb(0, 0, 0);
+      border-radius: 20px;
+    }
+
+    /* About Section Styling */
+    #about {
+      background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    }
+
+    .about-bg-pattern {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: radial-gradient(circle, rgba(102, 126, 234, 0.05) 1px, transparent 1px);
+      background-size: 30px 30px;
+      pointer-events: none;
+    }
+
+    /* Stat Cards */
+    .stat-card {
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .stat-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: var(--primary-gradient);
+      transform: scaleX(0);
+      transition: transform 0.4s ease;
+    }
+
+    .stat-card:hover {
+      transform: translateY(-10px) scale(1.02);
+      box-shadow: 0 20px 50px rgba(102, 126, 234, 0.2);
+    }
+
+    .stat-card:hover::before {
+      transform: scaleX(1);
+    }
+
+    .stat-icon-wrapper {
+      display: inline-block;
+      position: relative;
+    }
+
+    .stat-icon-large {
+      font-size: 3rem;
+      background: var(--primary-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    @keyframes float {
+
+      0%,
+      100% {
+        transform: translateY(0px);
+      }
+
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+
+    .gradient-text-primary {
+      background: var(--primary-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .letter-spacing-1 {
+      letter-spacing: 1px;
+    }
+
+    .stat-bar {
+      width: 60px;
+      height: 3px;
+      background: var(--primary-gradient);
+      margin: 0 auto;
+      border-radius: 2px;
+      animation: expandWidth 1s ease-out;
+    }
+
+    @keyframes expandWidth {
+      from {
+        width: 0;
+      }
+
+      to {
+        width: 60px;
+      }
+    }
+
+    /* Feature Boxes */
+    .feature-box {
+      background: white;
+      border-radius: 15px;
+      border: 2px solid transparent;
+      transition: all 0.4s ease;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .feature-box::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(102, 126, 234, 0.1), transparent);
+      transition: left 0.5s ease;
+    }
+
+    .feature-box:hover::before {
+      left: 100%;
+    }
+
+    .feature-box:hover {
+      border-color: rgba(102, 126, 234, 0.3);
+      transform: translateY(-5px);
+      box-shadow: 0 15px 40px rgba(102, 126, 234, 0.15);
+    }
+
+    .feature-icon {
+      width: 70px;
+      height: 70px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 15px;
+      background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+      font-size: 2rem;
+      color: #667eea;
+      transition: all 0.3s ease;
+    }
+
+    .feature-box:hover .feature-icon {
+      background: var(--primary-gradient);
+      color: white;
+      transform: rotateY(360deg);
+    }
+
+    /* Responsive */
+    @media (max-width: 991px) {
+      .hero-title {
+        font-size: 3rem;
+      }
+
+      .hero-profile-img {
+        max-width: 300px;
+      }
+    }
+
+    @media (max-width: 767px) {
+      .hero-title {
+        font-size: 2.5rem;
+      }
+
+      section {
+        padding: 60px 0;
+      }
+    }
+
+    /* Bento Grid Design */
+    .bento-grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 24px;
+      padding: 20px 0;
+    }
+
+    .bento-card {
+      background: white;
+      border-radius: 24px;
+      padding: 2rem;
+      border: 1px solid rgba(0, 0, 0, 0.05);
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .bento-card:hover {
+      transform: translateY(-5px) scale(1.01);
+      box-shadow: 0 20px 60px rgba(102, 126, 234, 0.15);
+      border-color: rgba(102, 126, 234, 0.2);
+      z-index: 2;
+    }
+
+    .bento-col-4 {
+      grid-column: span 4;
+    }
+
+    .bento-col-6 {
+      grid-column: span 6;
+    }
+
+    .bento-col-8 {
+      grid-column: span 8;
+    }
+
+    .bento-col-12 {
+      grid-column: span 12;
+    }
+
+    /* Bento Variations */
+    .bento-stat {
+      background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+      align-items: center;
+      text-align: center;
+    }
+
+    /* Experience Timeline Design - Zig Zag */
+    .timeline-container {
+      position: relative;
+      padding: 0;
+      margin: 0 auto;
+    }
+
+    .timeline-container::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      width: 4px;
+      background: rgba(102, 126, 234, 0.2);
+      transform: translateX(-50%);
+      border-radius: 4px;
+    }
+
+    .timeline-card {
+      position: relative;
+      margin-bottom: 3rem;
+      width: 50%;
+    }
+
+    .timeline-card:nth-child(odd) {
+      left: 0;
+      padding-right: 3rem;
+      text-align: right;
+    }
+
+    .timeline-card:nth-child(even) {
+      left: 50%;
+      padding-left: 3rem;
+      text-align: left;
+    }
+
+    .timeline-dot {
+      position: absolute;
+      top: 2rem;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: white;
+      border: 5px solid #667eea;
+      box-shadow: 0 0 0 5px rgba(102, 126, 234, 0.2);
+      z-index: 10;
+      transition: all 0.3s ease;
+    }
+
+    .timeline-card:nth-child(odd) .timeline-dot {
+      right: -12px;
+      left: auto;
+    }
+
+    .timeline-card:nth-child(even) .timeline-dot {
+      left: -12px;
+    }
+
+    .timeline-card:hover .timeline-dot {
+      background: #667eea;
+      box-shadow: 0 0 0 8px rgba(102, 126, 234, 0.3);
+      transform: scale(1.2);
+    }
+
+    .timeline-content {
+      background: white;
+      border-radius: 20px;
+      padding: 2.5rem;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+      border: none;
+      transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+      position: relative;
+    }
+
+    .timeline-content:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 25px 50px rgba(102, 126, 234, 0.15);
+    }
+
+    /* Pointers */
+    .timeline-content::before {
+      content: '';
+      position: absolute;
+      top: 2rem;
+      width: 20px;
+      height: 20px;
+      background: white;
+      transform: rotate(45deg);
+      z-index: 0;
+    }
+
+    .timeline-card:nth-child(odd) .timeline-content::before {
+      right: -10px;
+      left: auto;
+    }
+
+    .timeline-card:nth-child(even) .timeline-content::before {
+      left: -10px;
+    }
+
+    .timeline-date {
+      display: inline-block;
+      background: rgba(102, 126, 234, 0.1);
+      color: #667eea;
+      font-weight: 700;
+      padding: 0.4rem 1.2rem;
+      border-radius: 50px;
+      font-size: 0.8rem;
+      margin-bottom: 1.2rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    /* Responsive Timeline */
+    @media (max-width: 991px) {
+      .timeline-container::before {
+        left: 30px;
+      }
+
+      .timeline-card {
+        width: 100%;
+        padding-left: 5rem;
+        padding-right: 0 !important;
+        text-align: left !important;
+        margin-bottom: 2rem;
+      }
+
+      .timeline-card:nth-child(odd),
+      .timeline-card:nth-child(even) {
+        left: 0;
+      }
+
+      .timeline-card:nth-child(odd) .timeline-dot {
+        left: 18px;
+        right: auto;
+      }
+
+      .timeline-card:nth-child(even) .timeline-dot {
+        left: 18px;
+      }
+
+      .timeline-card:nth-child(odd) .timeline-content::before {
+        left: -10px;
+        right: auto;
+      }
+
+      .timeline-card:nth-child(even) .timeline-content::before {
+        left: -10px;
+      }
+    }
+
+    .bento-stat .icon-box {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: rgba(102, 126, 234, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      color: #667eea;
+      margin-bottom: 1rem;
+      transition: all 0.4s ease;
+    }
+
+    .bento-stat:hover .icon-box {
+      background: var(--primary-gradient);
+      color: white;
+      transform: rotate(360deg);
+    }
+
+    .bento-bio {
+      background: linear-gradient(135deg, white 0%, #f8f9fa 100%);
+    }
+
+    .bento-highlight {
+      background: var(--primary-gradient);
+      color: white;
+    }
+
+    .bento-highlight h2,
+    .bento-highlight p,
+    .bento-highlight i {
+      color: white !important;
+    }
+
+    /* Responsive Bento */
+    @media (max-width: 991px) {
+
+      .bento-col-4,
+      .bento-col-6,
+      .bento-col-8 {
+        grid-column: span 12;
+      }
+
+      .bento-grid {
+        gap: 16px;
+      }
+    }
+
+    /* Tech Stack Ticker (Optional for Bento) */
+    .tech-ticker-wrap {
+      overflow: hidden;
+      white-space: nowrap;
+    }
+
+    .tech-ticker {
+      display: inline-block;
+      animation: ticker 20s linear infinite;
+    }
+
+    .tech-item {
+      display: inline-block;
+      padding: 5px 15px;
+      margin: 0 10px;
+      border-radius: 20px;
+      background: rgba(102, 126, 234, 0.1);
+      color: #667eea;
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+
+    @keyframes ticker {
+      0% {
+        transform: translateX(0);
+      }
+
+      100% {
+        transform: translateX(-50%);
+      }
+    }
+  </style>
+</head>
+
+<body data-bs-spy="scroll" data-bs-target="#navbar" data-bs-offset="100">
+
+  <!-- Navigation -->
+  <nav id="navbar" class="navbar navbar-expand-lg navbar-light bg-white fixed-top shadow-sm">
+    <div class="container">
+      <a class="navbar-brand fw-bold" href="#">SHANTANU<span class="text-primary">.</span></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link active" href="#home">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
+          <li class="nav-item"><a class="nav-link" href="#skills">Skills</a></li>
+          <li class="nav-item"><a class="nav-link" href="#experience">Experience</a></li>
+          <li class="nav-item"><a class="nav-link" href="#portfolio">Portfolio</a></li>
+          <li class="nav-item"><a class="nav-link" href="#testimonials">Testimonials</a></li>
+          <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <header id="home" class="hero-section d-flex align-items-center text-white">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-lg-6 text-center text-lg-start mb-5 mb-lg-0">
+          <div class="hero-content">
+            <h6 class="text-primary-light text-uppercase fw-bold mb-3 ls-2">Welcome</h6>
+            <h1 class="display-2 fw-bold mb-4 hero-title">I'm <span class="text-gradient">Shantanu</span></h1>
+            <p class="lead mb-4 fs-4 hero-subtitle">A passionate Web Developer & UI/UX Designer crafting beautiful
+              digital experiences.</p>
+            <div class="d-flex gap-3 justify-content-center justify-content-lg-start flex-wrap">
+              <a href="#portfolio" class="btn btn-light btn-lg rounded-pill px-5 btn-hover-lift fw-bold"
+                style="background: white; border: none; color: #667eea;">View
+                Work</a>
+              <a href="#contact" class="btn btn-outline-light btn-lg rounded-pill px-5 btn-hover-lift">Contact Me</a>
+            </div>
+            <div class="social-links mt-4 d-flex gap-3 justify-content-center justify-content-lg-start">
+              <a href="#" class="social-icon"><i class="bi bi-linkedin"></i></a>
+              <a href="#" class="social-icon"><i class="bi bi-github"></i></a>
+              <a href="#" class="social-icon"><i class="bi bi-twitter-x"></i></a>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6 text-center">
+          <div class="hero-image-wrapper">
+            <div class="hero-image-border"></div>
+            <img src="shantanu.png" alt="Shantanu" class="hero-profile-img">
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+  <!-- About Section - Bento Style -->
+  <section id="about" class="position-relative overflow-hidden bg-light">
+    <div class="about-bg-pattern"></div>
+    <div class="container position-relative">
+
+      <div class="row justify-content-center mb-5">
+        <div class="col-lg-8 text-center">
+          <h6 class="text-primary text-uppercase fw-bold ls-2 mb-3">About Me</h6>
+          <h2 class="fw-bold mb-4">Get to Know <span class="text-gradient"></span></h2>
+        </div>
+      </div>
+
+      <div class="bento-grid">
+        <!-- Bio Card -->
+        <div class="bento-card bento-col-8 bento-bio">
+          <h3 class="fw-bold mb-3">Building Digital Solutions with <span class="text-primary">Passion</span></h3>
+          <p class="text-secondary lead">
+            I am a dedicated developer based in Nashik, India, specializing in building responsive websites and web
+            applications.
+          </p>
+          <p class="text-muted mb-4">
+            My journey started with a curiosity for code which evolved into a career. I love solving complex problems
+            and learning new technologies. With a strong foundation in frontend technologies, I transform ideas into
+            reality.
+          </p>
+          <div class="d-flex gap-3 mt-auto">
+            <a href="#contact" class="btn btn-primary rounded-pill px-4 btn-hover-lift">Let's Talk</a>
+            <a href="#portfolio" class="btn btn-outline-primary rounded-pill px-4 btn-hover-lift">My Work</a>
+          </div>
+        </div>
+
+        <!-- Stats Card Group -->
+        <div
+          class="bento-card bento-col-4 p-0 bg-transparent border-0 shadow-none d-flex flex-column gap-3 justify-content-between">
+
+          <div class="bento-card h-100 bento-stat justify-content-center">
+            <div class="d-flex align-items-center gap-3">
+              <div class="icon-box mb-0">
+                <i class="bi bi-calendar-check-fill text-gradient"></i>
+              </div>
+              <div class="text-start">
+                <h2 class="display-6 fw-bold mb-0 gradient-text-primary">1+</h2>
+                <span class="text-muted small text-uppercase fw-bold ls-1">Years Exp.</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="bento-card h-100 bento-stat justify-content-center">
+            <div class="d-flex align-items-center gap-3">
+              <div class="icon-box mb-0">
+                <i class="bi bi-briefcase-fill text-gradient"></i>
+              </div>
+              <div class="text-start">
+                <h2 class="display-6 fw-bold mb-0 gradient-text-primary">5+</h2>
+                <span class="text-muted small text-uppercase fw-bold ls-1">Projects</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="bento-card h-100 bento-stat justify-content-center">
+            <div class="d-flex align-items-center gap-3">
+              <div class="icon-box mb-0">
+                <i class="bi bi-people-fill text-gradient"></i>
+              </div>
+              <div class="text-start">
+                <h2 class="display-6 fw-bold mb-0 gradient-text-primary">3+</h2>
+                <span class="text-muted small text-uppercase fw-bold ls-1">Clients</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Features -->
+        <div class="bento-card bento-col-4">
+          <div class="feature-icon mb-3">
+            <i class="bi bi-lightbulb-fill"></i>
+          </div>
+          <h5 class="fw-bold">Problem Solver</h5>
+          <p class="text-muted small mb-0">Innovative thinking to approach challenges and deliver elegant solutions.</p>
+        </div>
+
+        <div class="bento-card bento-col-4 bento-highlight">
+          <div class="feature-icon bg-white text-primary mb-3">
+            <i class="bi bi-code-square text-primary"></i>
+          </div>
+          <h5 class="fw-bold text-white">Clean Code</h5>
+          <p class="text-white-50 small mb-0">Writing maintainable, scalable, and well-documented code is my core
+            philosophy.</p>
+        </div>
+
+        <div class="bento-card bento-col-4">
+          <div class="feature-icon mb-3">
+            <i class="bi bi-rocket-takeoff-fill"></i>
+          </div>
+          <h5 class="fw-bold">Fast Learner</h5>
+          <p class="text-muted small mb-0">Constantly exploring new technologies to stay at the forefront of
+            development.</p>
+        </div>
+
+        <!-- Tech Stack Ticker -->
+        <div class="bento-card bento-col-12 py-4 align-items-center bg-white">
+          <div class="tech-ticker-wrap">
+            <div class="tech-ticker">
+              <span class="tech-item"><i class="bi bi-filetype-html"></i> HTML5</span>
+              <span class="tech-item"><i class="bi bi-filetype-css"></i> CSS3</span>
+              <span class="tech-item"><i class="bi bi-bootstrap"></i> Bootstrap</span>
+              <span class="tech-item"><i class="bi bi-filetype-js"></i> JavaScript</span>
+              <span class="tech-item"><i class="bi bi-git"></i> Git</span>
+              <span class="tech-item"><i class="bi bi-github"></i> GitHub</span>
+              <span class="tech-item"><i class="bi bi-code-slash"></i> VS Code</span>
+              <span class="tech-item"><i class="bi bi-palette"></i> UI Design</span>
+              <!-- Duplicate for seamless loop -->
+              <span class="tech-item"><i class="bi bi-filetype-html"></i> HTML5</span>
+              <span class="tech-item"><i class="bi bi-filetype-css"></i> CSS3</span>
+              <span class="tech-item"><i class="bi bi-bootstrap"></i> Bootstrap</span>
+              <span class="tech-item"><i class="bi bi-filetype-js"></i> JavaScript</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Services Section -->
+  <section id="services">
+    <div class="container">
+      <div class="text-center mb-5">
+        <h6 class="text-primary text-uppercase fw-bold">Services</h6>
+        <h2 class="fw-bold">How I Can Help You</h2>
+      </div>
+      <div class="row g-4">
+        <div class="col-md-4">
+          <div class="p-5 text-center service-card shadow-sm h-100">
+            <i class="bi bi-display fs-1 text-primary mb-3"></i>
+            <h4 class="fw-bold">Web Design</h4>
+            <p class="text-secondary">Creating stunning, user-friendly designs that capture your brand's essence and
+              engage your audience.</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="p-5 text-center service-card shadow-sm h-100">
+            <i class="bi bi-code-slash fs-1 text-primary mb-3"></i>
+            <h4 class="fw-bold">Web Development</h4>
+            <p class="text-secondary">Building robust, scalable, and high-performance websites using the latest
+              technologies and best practices.</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="p-5 text-center service-card shadow-sm h-100">
+            <i class="bi bi-phone fs-1 text-primary mb-3"></i>
+            <h4 class="fw-bold">Responsive Design</h4>
+            <p class="text-secondary">Ensuring your website looks and functions perfectly on all devices, from desktops
+              to mobile phones.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills Section -->
+  <section id="skills" class="bg-light">
+    <div class="container">
+      <div class="text-center mb-5">
+        <h6 class="text-primary text-uppercase fw-bold">My Skills</h6>
+        <h2 class="fw-bold">What I Bring to the Table</h2>
+      </div>
+
+      <div class="row g-4">
+        <div class="col-md-6 col-lg-3">
+          <div class="card h-100 border-0 shadow-sm text-center p-4">
+            <div class="card-body">
+              <i class="bi bi-filetype-html skill-icon mb-3 d-block"></i>
+              <h5 class="card-title fw-bold">HTML5 & CSS3</h5>
+              <p class="card-text text-muted small">Semantic markup and responsive styling with modern CSS practices
+                using Flexbox and Grid.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-3">
+          <div class="card h-100 border-0 shadow-sm text-center p-4">
+            <div class="card-body">
+              <i class="bi bi-bootstrap skill-icon mb-3 d-block"></i>
+              <h5 class="card-title fw-bold">Bootstrap 5</h5>
+              <p class="card-text text-muted small">Rapid UI development with the world's most popular framework,
+                creating mobile-first sites.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-3">
+          <div class="card h-100 border-0 shadow-sm text-center p-4">
+            <div class="card-body">
+              <i class="bi bi-filetype-js skill-icon mb-3 d-block"></i>
+              <h5 class="card-title fw-bold">JavaScript</h5>
+              <p class="card-text text-muted small">Interactive functionality, DOM manipulation, and modern ES6+
+                features for dynamic web apps.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-3">
+          <div class="card h-100 border-0 shadow-sm text-center p-4">
+            <div class="card-body">
+              <i class="bi bi-git skill-icon mb-3 d-block"></i>
+              <h5 class="card-title fw-bold">Git & GitHub</h5>
+              <p class="card-text text-muted small">Version control, collaboration, and repository management for
+                efficient workflows.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Experience Section -->
+  <section id="experience">
+    <div class="container">
+      <div class="text-center mb-5">
+        <h6 class="text-primary text-uppercase fw-bold">Journey</h6>
+        <h2 class="fw-bold">My Experience</h2>
+      </div>
+      <div class="row justify-content-center">
+        <div class="col-lg-8">
+          <div class="timeline-container">
+
+            <!-- Item 1 -->
+            <div class="timeline-card">
+              <div class="timeline-dot"></div>
+              <div class="timeline-content">
+                <span class="timeline-date">2024 - Present</span>
+                <h4 class="fw-bold mb-1">Senior Developer</h4>
+                <h6 class="text-primary mb-3">Tech Solutions Inc.</h6>
+                <p class="text-secondary mb-0">Leading the frontend team, architecting scalable web applications, and
+                  mentoring junior developers to ensure code quality and best practices.</p>
+              </div>
+            </div>
+
+            <!-- Item 2 -->
+            <div class="timeline-card">
+              <div class="timeline-dot"></div>
+              <div class="timeline-content">
+                <span class="timeline-date">2022 - 2024</span>
+                <h4 class="fw-bold mb-1">Web Developer</h4>
+                <h6 class="text-primary mb-3">Creative Agency</h6>
+                <p class="text-secondary mb-0">Developed and maintained high-performance client websites, collaborated
+                  with UI/UX designers, and optimized site speed and SEO.</p>
+              </div>
+            </div>
+
+            <!-- Item 3 -->
+            <div class="timeline-card">
+              <div class="timeline-dot"></div>
+              <div class="timeline-content">
+                <span class="timeline-date">2020 - 2022</span>
+                <h4 class="fw-bold mb-1">Junior Developer</h4>
+                <h6 class="text-primary mb-3">StartUp Hub</h6>
+                <p class="text-secondary mb-0">Assisted in developing core web features, fixing bugs, conducting
+                  testing, and participating in code reviews to learn industry standards.</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Portfolio Section -->
+  <section id="portfolio" class="bg-light">
+    <div class="container">
+      <div class="text-center mb-5">
+        <h6 class="text-primary text-uppercase fw-bold">Portfolio</h6>
+        <h2 class="fw-bold">Recent Projects</h2>
+      </div>
+
+      <div class="row g-4">
+        <!-- Project 1 -->
+        <div class="col-md-4">
+          <div class="card h-100 border-0 shadow-sm portfolio-card overflow-hidden">
+            <div class="card-header p-0 border-0 bg-secondary"
+              style="height: 200px; display: flex; align-items: center; justify-content: center;">
+              <i class="bi bi-shop text-white fs-1"></i>
+            </div>
+            <div class="card-body p-4">
+              <h5 class="card-title fw-bold">E-Commerce Store</h5>
+              <p class="card-text text-muted">A fully responsive online store showing products, cart functionality, and
+                checkout flow using only HTML, CSS, and JS.</p>
+              <a href="#" class="btn btn-outline-primary btn-sm mt-2">View Demo</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project 2 -->
+        <div class="col-md-4">
+          <div class="card h-100 border-0 shadow-sm portfolio-card overflow-hidden">
+            <div class="card-header p-0 border-0 bg-primary"
+              style="height: 200px; display: flex; align-items: center; justify-content: center;">
+              <i class="bi bi-kanban text-white fs-1"></i>
+            </div>
+            <div class="card-body p-4">
+              <h5 class="card-title fw-bold">Task Dashboard</h5>
+              <p class="card-text text-muted">An admin dashboard with charts, data tables, and user management interface
+                built with Bootstrap components.</p>
+              <a href="#" class="btn btn-outline-primary btn-sm mt-2">View Demo</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project 3 -->
+        <div class="col-md-4">
+          <div class="card h-100 border-0 shadow-sm portfolio-card overflow-hidden">
+            <div class="card-header p-0 border-0 bg-dark"
+              style="height: 200px; display: flex; align-items: center; justify-content: center;">
+              <i class="bi bi-camera-reels text-white fs-1"></i>
+            </div>
+            <div class="card-body p-4">
+              <h5 class="card-title fw-bold">Photography Portfolio</h5>
+              <p class="card-text text-muted">A clean, gallery-focused website for a photographer to showcase their work
+                in a masonry layout.</p>
+              <a href="#" class="btn btn-outline-primary btn-sm mt-2">View Demo</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials Section -->
+  <section id="testimonials">
+    <div class="container">
+      <div class="text-center mb-5">
+        <h6 class="text-primary text-uppercase fw-bold">Testimonials</h6>
+        <h2 class="fw-bold">What Clients Say</h2>
+      </div>
+      <div class="row justify-content-center">
+        <div class="col-lg-8">
+          <div id="testimonialCarousel" class="carousel slide text-center bg-light p-5 rounded-4 shadow-sm"
+            data-bs-ride="carousel">
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <i class="bi bi-chat-quote fs-1 text-primary mb-3"></i>
+                <p class="lead fst-italic text-secondary mb-4">"Shantanu is an amazing developer! He delivered our
+                  project on time and exceeded our expectations with his attention to detail."</p>
+                <h5 class="fw-bold">John Doe</h5>
+                <span class="text-muted small">CEO, Example Corp</span>
+              </div>
+              <div class="carousel-item">
+                <i class="bi bi-chat-quote fs-1 text-primary mb-3"></i>
+                <p class="lead fst-italic text-secondary mb-4">"The website design is top-notch. It's clean, modern, and
+                  exactly what we were looking for. Highly recommended!"</p>
+                <h5 class="fw-bold">Jane Smith</h5>
+                <span class="text-muted small">Founder, Creative Studio</span>
+              </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#testimonialCarousel"
+              data-bs-slide="prev">
+              <span class="carousel-control-prev-icon bg-dark rounded-circle p-2" aria-hidden="true"></span>
+              <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#testimonialCarousel"
+              data-bs-slide="next">
+              <span class="carousel-control-next-icon bg-dark rounded-circle p-2" aria-hidden="true"></span>
+              <span class="visually-hidden">Next</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Contact Section -->
+  <section id="contact" class="position-relative py-5">
+    <div class="container py-5">
+      <div class="text-center mb-5">
+        <h6 class="text-primary text-uppercase fw-bold ls-2 mb-3">Contact</h6>
+        <h2 class="display-5 fw-bold mb-3">Have a project in mind?</h2>
+        <p class="lead text-secondary w-75 mx-auto">Let's collaborate and build something amazing together.</p>
+      </div>
+
+      <div class="row g-0 justify-content-center shadow-lg rounded-5 overflow-hidden">
+        <!-- Contact Info Side -->
+        <div class="col-lg-5 text-white p-5 position-relative d-flex flex-column justify-content-between"
+          style="background: var(--primary-gradient);">
+          <!-- Decorative overlay -->
+          <div class="position-absolute top-0 start-0 w-100 h-100"
+            style="background: radial-gradient(circle at top right, rgba(255,255,255,0.1), transparent); pointer-events: none;">
+          </div>
+
+          <div class="position-relative z-1">
+            <h3 class="fw-bold mb-4">Get In Touch</h3>
+            <p class="mb-5 opacity-75 fs-5">I'm currently available for freelance work or full-time opportunities.</p>
+
+            <div class="d-flex flex-column gap-4 text-start">
+              <div class="d-flex align-items-center gap-3">
+                <div
+                  class="bg-white bg-opacity-10 p-3 rounded-circle text-white d-flex justify-content-center align-items-center"
+                  style="width: 50px; height: 50px;">
+                  <i class="bi bi-geo-alt-fill fs-5"></i>
+                </div>
+                <div>
+                  <span class="text-white-50 text-uppercase fw-bold ls-1 d-block small">Location</span>
+                  <span class="fs-5 fw-semibold">Nashik, India</span>
+                </div>
+              </div>
+
+              <div class="d-flex align-items-center gap-3">
+                <div
+                  class="bg-white bg-opacity-10 p-3 rounded-circle text-white d-flex justify-content-center align-items-center"
+                  style="width: 50px; height: 50px;">
+                  <i class="bi bi-envelope-fill fs-5"></i>
+                </div>
+                <div style="overflow-wrap: break-word; word-break: break-all;">
+                  <span class="text-white-50 text-uppercase fw-bold ls-1 d-block small">Email</span>
+                  <span class="fs-5 fw-semibold">shantanuwadghule9423@gmail.com</span>
+                </div>
+              </div>
+
+              <div class="d-flex align-items-center gap-3">
+                <div
+                  class="bg-white bg-opacity-10 p-3 rounded-circle text-white d-flex justify-content-center align-items-center"
+                  style="width: 50px; height: 50px;">
+                  <i class="bi bi-telephone-fill fs-5"></i>
+                </div>
+                <div>
+                  <span class="text-white-50 text-uppercase fw-bold ls-1 d-block small">Phone</span>
+                  <span class="fs-5 fw-semibold">+91 9356988876</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-5 position-relative z-1">
+            <div class="d-flex gap-3">
+              <a href="#" class="text-white opacity-75 hover-opacity-100 transition-all fs-4"><i
+                  class="bi bi-linkedin"></i></a>
+              <a href="#" class="text-white opacity-75 hover-opacity-100 transition-all fs-4"><i
+                  class="bi bi-github"></i></a>
+              <a href="#" class="text-white opacity-75 hover-opacity-100 transition-all fs-4"><i
+                  class="bi bi-twitter-x"></i></a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Form Side -->
+        <div class="col-lg-7 bg-white p-5">
+          <form>
+            <div class="row g-4">
+              <div class="col-md-6">
+                <label for="name" class="form-label fw-bold text-secondary text-uppercase small ls-1">Your Name</label>
+                <input type="text" class="form-control form-control-lg bg-light border-0 rounded-3 py-3" id="name"
+                  placeholder="John Doe">
+              </div>
+              <div class="col-md-6">
+                <label for="email" class="form-label fw-bold text-secondary text-uppercase small ls-1">Your
+                  Email</label>
+                <input type="email" class="form-control form-control-lg bg-light border-0 rounded-3 py-3" id="email"
+                  placeholder="john@example.com">
+              </div>
+              <div class="col-12">
+                <label for="subject" class="form-label fw-bold text-secondary text-uppercase small ls-1">Subject</label>
+                <input type="text" class="form-control form-control-lg bg-light border-0 rounded-3 py-3" id="subject"
+                  placeholder="Project Inquiry">
+              </div>
+              <div class="col-12">
+                <label for="message" class="form-label fw-bold text-secondary text-uppercase small ls-1">Message</label>
+                <textarea class="form-control form-control-lg bg-light border-0 rounded-3" id="message" rows="5"
+                  placeholder="Leave a message here..." style="resize: none;"></textarea>
+              </div>
+              <div class="col-12 mt-5">
+                <button type="submit"
+                  class="btn btn-light btn-lg rounded-pill px-5 btn-hover-lift w-100 py-3 fw-bold fs-5 shadow-lg d-flex align-items-center justify-content-center gap-2"
+                  style="color: #764ba2;">
+                  Send Message <i class="bi bi-send-fill fs-6"></i>
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-white py-5 mt-auto border-top border-light">
+    <div class="container text-center">
+      <div class="mb-4">
+        <a href="#" class="fw-bold fs-3 text-dark text-decoration-none ls-2"
+          style="font-family: 'Poppins', sans-serif;">SHANTANU<span class="text-primary">.</span></a>
+      </div>
+      <p class="mb-0 text-muted small fw-medium">&copy; 2026 Shantanu. All Rights Reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS Bundle with Popper -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
